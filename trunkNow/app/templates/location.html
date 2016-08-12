@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>TrunkDrive</title>
+
+    <!-- Bootstrap -->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="../static/css/starter-template.css" rel="stylesheet">
+
+    <!-- Normalize for all devices -->
+    <link href="../static/css/normalize.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+        width: 90%;
+        margin:20px auto;
+        display:inline-block;
+      }
+
+      #outerdiv {
+      	width: 100%;
+      	height: 90%;
+      	position:fixed;
+      	text-align:center
+      }
+    </style>
+</head>
+<body>
+    <!--Google Maps goes here {{location}}-->
+    <div id="outerdiv">
+    <div id="map"></div>
+    </div>
+    <script>
+    function initMap() {
+        var trunkLatlng = {lat: 48.2677326, lng: 11.6649994};
+//        var trunkLatlng = {lat: {{location['lat']}} , lng: {{location['lng']}}};
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 18,
+          center: trunkLatlng
+        });
+
+        var marker = new google.maps.Marker({
+          position: trunkLatlng,
+          map: map,
+          icon: 'http://fs5.directupload.net/images/160321/q8s7qobc.png',
+          title: 'Trunk to deliver to'
+        });
+
+        var postLatlng = {lat: 48.2675326, lng: 11.6647994};
+
+         var marker2 = new google.maps.Marker({
+          position: postLatlng,
+          map: map,
+          icon: 'http://fs5.directupload.net/images/160321/ooym4je2.png',
+          title: 'Delivery Car'
+        });
+
+        marker.addListener('click', function() {
+          map.setZoom(19);
+          map.setCenter(marker.getPosition());
+        });
+    }
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBeFLCasFS9cwUsm899znsgUAqowGgHAdM&callback=initMap" async defer></script>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+</body>
+</html>
